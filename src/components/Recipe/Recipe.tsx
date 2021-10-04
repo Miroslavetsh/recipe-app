@@ -1,31 +1,45 @@
+import Card from '../Card/Card'
+import { IngredientPropsTypes } from '../Ingredient/Ingredient'
 import styles from './Recipe.module.scss'
-
-// type Ingredient = {}
 
 export type RecipePropsTypes = {
   recipe: {
+    label: string
     calories: number
     image: string
     mealType: Array<string>
     totalTime: number
     healthLabels: Array<string>
-    // ingredients: Array<Ingredient>
+    ingredients: Array<IngredientPropsTypes>
   }
 }
 
 const Recipe: React.FC<RecipePropsTypes> = (props) => {
-  const { calories, image, mealType, totalTime, healthLabels } = props.recipe
+  const {
+    label,
+    calories,
+    image,
+    mealType,
+    totalTime,
+    healthLabels,
+    ingredients,
+  } = props.recipe
 
   return (
     <div className={styles.recipe}>
-      {Object.keys(props).map((key) => key)}
-      {}
-      calories: {calories}
+      <p>{label}</p>
+      <p>{calories.toFixed(2)}</p>
       <img src={image} alt={image} />
-      time: {totalTime}
-      meal type: {mealType}
-      meal type: {healthLabels}
-      {/* ingredients: {ingredients.map((ingredient: any) => ingredient)} */}
+      <p>{totalTime}</p>
+      <p>{mealType}</p>
+      <p>{healthLabels} lbls</p>
+      {ingredients.map((ingredient: IngredientPropsTypes) => (
+        <Card
+          title={ingredient.food}
+          num={ingredient.weight}
+          image={ingredient.image}
+        />
+      ))}
     </div>
   )
 }

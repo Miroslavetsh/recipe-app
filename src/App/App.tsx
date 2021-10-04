@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Container from '../components/Container/Container'
-import Recipe from '../components/Recipe/Recipe'
+import Card from '../components/Card/Card'
+import useDebounce from '../hooks/useDebounce'
+
 import styles from './App.module.scss'
+import { RecipePropsTypes } from '../components/Recipe/Recipe'
 
 type EdamamLinkParamsTypes = {
   from: number
@@ -16,22 +19,28 @@ const App = () => {
     useState<EdamamLinkParamsTypes>({
       from: 0,
       to: 10,
-      q: 'chicken',
+      q: 'pizza',
     })
-
-  const [recipes, setRecipes] = useState([])
+  const dobouncedEdamamParams = useDebounce<EdamamLinkParamsTypes>(
+    edamamLinkParams,
+    500
+  )
+  const [recipes, setRecipes] = useState<RecipePropsTypes[]>([])
+  const searchRef = useRef(null)
 
   useEffect(() => {
-    getRecipes(edamamLinkParams)
+    getRecipes(dobouncedEdamamParams)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [edamamLinkParams])
+  }, [dobouncedEdamamParams])
 
   const getRecipes = async (edamamLinkParams: EdamamLinkParamsTypes) => {
     try {
       const { from, to, q } = edamamLinkParams
       const edamamLink = `https://api.edamam.com/search?q=${q}&from=${from}&to=${to}&app_id=${APP_ID}&app_key=${APP_KEY}`
+
       const response: Response = await fetch(edamamLink)
       const data = await response.json()
+
       setRecipes(data.hits)
     } catch (e) {
       console.error(e)
@@ -43,27 +52,68 @@ const App = () => {
       <Container>
         <h1 className={styles.title}>Recipe Application</h1>
 
-        <form className={styles.form}>
-          <input className={styles.input} type='text' />
-          <button
-            onClick={(e: React.FormEvent) => {
-              e.preventDefault()
-              getRecipes(edamamLinkParams)
-            }}
-            className={styles.button}></button>
-        </form>
+        <input
+          ref={searchRef}
+          className={styles.input}
+          type='text'
+          onChange={() => {
+            const input = searchRef.current as unknown as HTMLInputElement
+            setEdamamLinkParams({ ...edamamLinkParams, q: input.value })
+          }}
+          onKeyUp={(event) => {
+            if (event.key === 'Enter') {
+              getRecipes(dobouncedEdamamParams)
+            }
+          }}
+        />
       </Container>
+
+      {/* TODO Sorting Features */}
       <Container>
-        Filter: {edamamLinkParams.from}
-        <button
-          onClick={() => {
-            setEdamamLinkParams({ q: 'beetroot', from: 10, to: 20 })
-          }}></button>
+        <h2 className={styles.title}>Sorting</h2>
+        <div className={styles.sorting}>
+          <p>A - Z</p>
+          <p>Z - A</p>
+          <p>More/Less caloriable</p>
+          <p>Fastest</p>
+          <p>Chip(less ingredients)</p>
+          <p>Laziest (less ingredients and less time)</p>
+        </div>
       </Container>
+
+      {/* Result */}
       <Container>
+        <h2 className={styles.title}>Results</h2>
+
         {recipes.map((recipe, idx) => (
-          <Recipe {...recipe} key={idx} />
+          <Card
+            title={recipe.recipe.label}
+            num={recipe.recipe.calories}
+            image={recipe.recipe.image}
+            key={idx}
+          />
         ))}
+      </Container>
+
+      <Container>
+        <h2 className={styles.title}>Pagination</h2>
+        {() => {
+          const { from, to } = edamamLinkParams
+          const buttons = ['Prev', 'Next']
+
+          return buttons.map((btnText) => (
+            <button
+              onClick={() => {
+                setEdamamLinkParams({
+                  ...edamamLinkParams,
+                  from,
+                  to,
+                })
+              }}>
+              {btnText}
+            </button>
+          ))
+        }}
       </Container>
     </div>
   )
