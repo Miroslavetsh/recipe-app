@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
-import Homepage from '../components/HomePage'
+import Homepage from '../pages/HomePage'
 import { RecipePropsTypes } from '../components/Recipe/Recipe'
 
 import styles from './App.module.scss'

@@ -27,6 +27,6 @@ test('should be on page with truthy params', () => {
   render(<Recipe {...recipe} />)
 })
 
-test('recipe contains ingredients with truthy parameters', () => {
-
-})
+// TODO
+// test('recipe contains ingredients with truthy parameters', () => {
+// })
