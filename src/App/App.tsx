@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { ErrorContext } from '../context'
+// import { useErrorContext } from '../context'
 
 import Homepage from '../pages/HomePage'
-import { RecipePropsTypes } from '../components/Recipe/Recipe'
+import { RecipePropsTypes } from '../pages/Recipe'
 
 import styles from './App.module.scss'
 
@@ -23,6 +25,7 @@ const App: React.FC = () => {
     })
 
   const [recipes, setRecipes] = useState<RecipePropsTypes[]>([])
+  const [errorMessage, setErrorMessage] = useState<string>('')
 
   const getRecipes = async (edamamLinkParams: EdamamLinkParamsTypes) => {
     try {
@@ -36,26 +39,32 @@ const App: React.FC = () => {
       const e = err as Error
       switch (e.name) {
         case 'TypeError':
+          setErrorMessage(
+            'It seems like too many requests to the server. Please, wait a few seconds and try again'
+          )
           console.warn(e.message)
       }
     }
   }
 
   return (
-    <div className={styles.wrapper}>
-      <Router>
-        <Switch>
-          <Route exact path='/'>
-            <Homepage
-              edamamLinkParams={edamamLinkParams}
-              setEdamamLinkParams={setEdamamLinkParams}
-              recipes={recipes}
-              getRecipes={getRecipes}
-            />
-          </Route>
-        </Switch>
-      </Router>
-    </div>
+    <ErrorContext.Provider value={{ errorMessage, setErrorMessage }}>
+      <div className={styles.wrapper}>
+        <Router>
+          <Switch>
+            <Route exact path='/'>
+              <Homepage
+                edamamLinkParams={edamamLinkParams}
+                setEdamamLinkParams={setEdamamLinkParams}
+                recipes={recipes}
+                getRecipes={getRecipes}
+                errorMessage={errorMessage}
+              />
+            </Route>
+          </Switch>
+        </Router>
+      </div>
+    </ErrorContext.Provider>
   )
 }
 

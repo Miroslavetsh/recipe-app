@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react'
-import Recipe, { RecipePropsTypes } from './Recipe'
+import Recipe, { RecipePropsTypes } from '.'
 
 const recipe: RecipePropsTypes = {
   recipe: {
@@ -9,6 +9,7 @@ const recipe: RecipePropsTypes = {
     mealType: ['MealType1', 'MealType2'],
     totalTime: 60,
     healthLabels: ['Health Label'],
+    uri: 'https::/some.url.org/recipe#recipe_id_with_custom_hash',
     ingredients: [
       {
         food: 'Some ingredient',

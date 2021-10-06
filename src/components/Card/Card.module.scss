@@ -36,6 +36,7 @@
       text-transform: uppercase;
       top: 0;
       left: 0;
+      font-weight: 900;
       background-color: rgba(#000, 0);
       pointer-events: none;
       z-index: 3;
@@ -58,12 +59,12 @@
     flex: 1 1 auto;
     font-size: 1.6em;
     line-height: 1.1;
-    margin: 0.8em 0 0.4em;
+    margin: 0.8em 0;
   }
 
   .number {
     color: rgb(159, 65, 10);
-    font-size: 1.1em;
+    font-size: 1.2em;
     text-align: right;
   }
 }

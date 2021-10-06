@@ -1,6 +1,6 @@
-import Card from '../Card/Card'
-import { IngredientPropsTypes } from '../Ingredient/Ingredient'
-import styles from './Recipe.module.scss'
+import Card from '../../components/Card/Card'
+import { IngredientPropsTypes } from '../../components/Ingredient/Ingredient'
+import styles from './Styles.module.scss'
 
 export type RecipePropsTypes = {
   recipe: {
@@ -11,6 +11,7 @@ export type RecipePropsTypes = {
     totalTime: number
     healthLabels: Array<string>
     ingredients: Array<IngredientPropsTypes>
+    uri: string
   }
 }
 
@@ -23,10 +24,12 @@ const Recipe: React.FC<RecipePropsTypes> = (props) => {
     totalTime,
     healthLabels,
     ingredients,
+    uri
   } = props.recipe
 
   return (
     <div className={styles.recipe}>
+      <p>{uri}</p>
       <p>{label}</p>
       <p>{calories.toFixed(2)}</p>
       <img src={image} alt={image} />

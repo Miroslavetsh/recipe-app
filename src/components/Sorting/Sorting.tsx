@@ -40,9 +40,10 @@ const Sorting: React.FC = () => {
     <aside className={styles.sorting}>
       <h2 className={titleClassNames.join(' ')}>Sorting</h2>
       <div className={styles.table}>
-        {sortingParameters.map((parameter) => (
+        {sortingParameters.map((parameter, idx) => (
           <p
             className={styles.parameter}
+            key={idx}
             onClick={() => {
               parameter.callback()
             }}>

@@ -2,17 +2,19 @@ type InputValidatorPropsTypes = {
   searchRef: any
   len: number
   className?: string
+  message?: string
 }
 
 const InputValidator: React.FC<InputValidatorPropsTypes> = (props) => {
   const { len, className, searchRef } = props
-  let message = ''
+  let { message } = props
+
   try {
     const searchInput = searchRef.current as unknown as HTMLInputElement
 
-    if (len === 0 && searchInput.value.length === 0)
+    if (len === 0 && searchInput.value.length === 0 && message === '')
       message = 'There are no words entered to the input :('
-    else if (len === 0 && searchInput.value.length !== 0)
+    else if (len === 0 && searchInput.value.length !== 0 && message === '')
       message =
         'It seems like your entered word is not an ingredient. Try again :)'
   } catch {}
