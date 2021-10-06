@@ -33,13 +33,17 @@ const Recipe: React.FC<RecipePropsTypes> = (props) => {
       <p>{totalTime}</p>
       <p>{mealType}</p>
       <p>{healthLabels} lbls</p>
-      {ingredients.map((ingredient: IngredientPropsTypes) => (
-        <Card
-          title={ingredient.food}
-          num={ingredient.weight}
-          image={ingredient.image}
-        />
-      ))}
+      <div className={styles.ingerdients}>
+        {ingredients.map((ingredient: IngredientPropsTypes, idx) => (
+          <Card
+            title={ingredient.food}
+            num={ingredient.weight}
+            image={ingredient.image}
+            key={idx}
+            textForNumber={'Weight: '}
+          />
+        ))}
+      </div>
     </div>
   )
 }
