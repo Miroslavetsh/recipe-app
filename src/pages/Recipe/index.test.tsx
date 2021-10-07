@@ -1,5 +1,6 @@
 import { render } from '@testing-library/react'
-import RecipePage, { RecipeSchema } from '.'
+import RecipePage from './'
+import RecipeSchema from '../../schema/Recipe'
 
 const recipe: RecipeSchema = {
   recipe: {
@@ -19,6 +20,7 @@ const recipe: RecipeSchema = {
         quantity: 12,
         text: '12 bowls of some ingredient',
         weight: 240,
+        foodId: 'food_2re3e2t3fyt23653ru23tf2i3jy'
       },
     ],
   },

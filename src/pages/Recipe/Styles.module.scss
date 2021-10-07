@@ -1,0 +1,44 @@
+@import '../../styles/variables.scss';
+
+.page {
+  padding-bottom: 40px;
+}
+
+.cover {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 270px;
+  background-size: 90px 90px;
+  position: relative;
+  &::after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    background-color: rgba(#000, 0.6);
+  }
+}
+
+.title {
+  text-align: center;
+  font-size: 5.2em;
+  font-weight: 900;
+  color: $light_color;
+  position: relative;
+  z-index: 1;
+}
+
+.ingerdients {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.card {
+  width: 19%;
+}

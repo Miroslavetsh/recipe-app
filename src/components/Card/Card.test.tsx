@@ -9,9 +9,9 @@ const cardProps = {
 }
 
 test('should be on page with truthy params', () => {
-  render(<Card {...cardProps} />)
+  render(<Card route={''} {...cardProps} />)
 })
 
 test('should correctly process className prop', () => {
-  render(<Card {...{ ...cardProps, className: 'some__class' }} />)
+  render(<Card route={''} {...{ ...cardProps, className: 'some__class' }} />)
 })

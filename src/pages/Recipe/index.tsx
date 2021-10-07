@@ -1,35 +1,27 @@
 import { useParams } from 'react-router'
+import BackButton from '../../components/BackButton/BackButton'
+// import { Route } from 'react-router-dom'
 import Card from '../../components/Card/Card'
-import { IngredientPropsTypes } from '../../components/Ingredient/Ingredient'
+import Container from '../../components/Container/Container'
+import IngredientSchema from '../../schema/Ingredient'
+import RecipeSchema from '../../schema/Recipe'
+// import Ingredient from '../../pages/Ingredient'
 
 import styles from './Styles.module.scss'
-
-export interface RecipeSchema {
-  recipe: {
-    label: string
-    calories: number
-    image: string
-    mealType: Array<string>
-    totalTime: number
-    healthLabels: Array<string>
-    ingredients: Array<IngredientPropsTypes>
-    uri: string
-  }
-}
 
 export type RecipePagePropsTypes = {
   recipes: Array<RecipeSchema>
 }
 
 type Params = {
-  recipeID: string
+  recipeId: string
 }
 
 const Recipe: React.FC<RecipePagePropsTypes> = (props) => {
-  const { recipeID }: Params = useParams()
+  const { recipeId }: Params = useParams()
   const { recipes } = props
   const recipe = recipes.find(
-    (recipe) => recipe.recipe.uri.indexOf(recipeID) !== -1
+    (recipe) => recipe.recipe.uri.indexOf(recipeId) !== -1
   )
 
   const {
@@ -40,33 +32,42 @@ const Recipe: React.FC<RecipePagePropsTypes> = (props) => {
     totalTime,
     healthLabels,
     ingredients,
-    uri,
   } = recipe?.recipe || {}
 
-  // TODO ingredient page
-
   return (
-    <div className={styles.recipe}>
-      <h1>Recipe Page</h1>
-      <p>{uri}</p>
-      <p>{label}</p>
-      <p>{calories?.toFixed(2)}</p>
-      <img src={image} alt={image} />
-      <p>{totalTime}</p>
-      <p>{mealType}</p>
-      <p>{healthLabels} lbls</p>
-      <div className={styles.ingerdients}>
-        {ingredients?.map((ingredient: IngredientPropsTypes, idx: number) => (
-          <Card
-            route={'/'}
-            title={ingredient.food}
-            num={ingredient.weight}
-            image={ingredient.image}
-            textForNumber={'Weight: '}
-            key={idx}
-          />
-        ))}
+    <div className={styles.page}>
+      <BackButton className={styles.back} />
+
+      <div
+        className={styles.cover}
+        style={{ backgroundImage: 'url(' + image + ')' }}>
+        <Container>
+          <h1 className={styles.title}>{label}</h1>
+        </Container>
       </div>
+
+      <Container>
+        <p>{calories?.toFixed(2)}</p>
+        <p>{totalTime}</p>
+        <p>{mealType}</p>
+        <p>{healthLabels} lbls</p>
+
+        <h2 className={styles.subtitle}>Ingredients</h2>
+        <div className={styles.ingerdients}>
+          {ingredients?.map((ingredient: IngredientSchema, idx: number) => (
+            <Card
+              className={styles.card}
+              horizontal={true}
+              route={`/ingredients/${ingredient.foodId}`}
+              title={ingredient.food}
+              num={ingredient.weight}
+              image={ingredient.image}
+              textForNumber={'Weight: '}
+              key={idx}
+            />
+          ))}
+        </div>
+      </Container>
     </div>
   )
 }

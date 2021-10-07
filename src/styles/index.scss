@@ -1,4 +1,5 @@
 @import 'nullstyle.scss';
+@import 'variables.scss';
 
 body {
   padding: 3em 0;
@@ -10,14 +11,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-size: 10px;
   color: #fff;
-  background-color: #2f3437;
+  background-color: $body_color;
   &::-webkit-scrollbar {
     width: 8px;
     &-track {
-      background-color: rgb(35, 35, 35);
+      background-color: $darker_gray_color;
     }
     &-thumb {
-      background-color: #4a4a4a;
+      background-color: $lighter_gray_color;
     }
   }
 }

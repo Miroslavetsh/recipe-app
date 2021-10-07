@@ -4,7 +4,7 @@ import { EdamamLinkParamsTypes } from '../../App/App'
 import Card from '../Card/Card'
 import Container from '../Container/Container'
 import InputValidator from '../InputValidator/InputValidator'
-import { RecipeSchema } from '../../pages/Recipe'
+import RecipeSchema from '../../schema/Recipe'
 
 import styles from './Main.module.scss'
 import { useErrorContext } from '../../context'
@@ -83,7 +83,7 @@ const Main: React.FC<MainPropsTypes> = (props) => {
 
                 return (
                   <Card
-                    route={`/recipe/${recipeID}`}
+                    route={`/recipes/${recipeID}`}
                     title={recipe.recipe.label}
                     textForNumber={'Calories: '}
                     num={recipe.recipe.calories}

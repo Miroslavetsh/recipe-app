@@ -2,11 +2,11 @@ import { useEffect, useRef } from 'react'
 import { EdamamLinkParamsTypes } from '../../App/App'
 
 import useDebounce from '../../hooks/useDebounce'
-import { RecipeSchema } from '../Recipe'
+import RecipeSchema from '../../schema/Recipe'
 import Sorting from '../../components/Sorting/Sorting'
 import Main from '../../components/Main/Main'
 
-import styles from './Home.module.scss'
+import styles from './Styles.module.scss'
 
 type HomePropsTypes = {
   edamamLinkParams: EdamamLinkParamsTypes

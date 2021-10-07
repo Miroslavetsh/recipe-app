@@ -1,9 +1,16 @@
 import { useState } from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom'
 import { ErrorContext } from '../context'
 
 import Home from '../pages/Home'
-import RecipePage, { RecipeSchema } from '../pages/Recipe'
+// import Ingredient from '../pages/Ingredient'
+import Recipe from '../pages/Recipe'
+import RecipeSchema from '../schema/Recipe'
 
 import styles from './App.module.scss'
 
@@ -52,6 +59,9 @@ const App: React.FC = () => {
         <Router>
           <Switch>
             <Route exact path='/'>
+              <Redirect to='/recipes' />
+            </Route>
+            <Route exact path='/recipes'>
               <Home
                 edamamLinkParams={edamamLinkParams}
                 setEdamamLinkParams={setEdamamLinkParams}
@@ -60,14 +70,18 @@ const App: React.FC = () => {
                 errorMessage={errorMessage}
               />
             </Route>
-          </Switch>
-          <Switch>
             <Route
-              path='/recipe/:recipeID'
+              path='/recipes/:recipeId'
               component={() => {
-                return <RecipePage recipes={recipes} />
+                return <Recipe recipes={recipes} />
               }}
             />
+            {/* <Route
+              path='/ingredients/:foodId'
+              component={() => {
+                return <Ingredient ingredient={ingredient} />
+              }}
+            /> */}
           </Switch>
         </Router>
       </div>
