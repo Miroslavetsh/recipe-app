@@ -12,8 +12,8 @@ const BackButton: React.FC<BackButtonPropsTypes> = (props) => {
     <a className={classNames.join(' ')} href={'/recipes'} title='Move Back'>
       <span>
         <svg
-          width='11px'
-          height='20px'
+          width='8px'
+          height='16px'
           viewBox='0 0 11 20'
           version='1.1'
           xmlns='http://www.w3.org/2000/svg'>
