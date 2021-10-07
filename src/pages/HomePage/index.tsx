@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { EdamamLinkParamsTypes } from '../../App/App'
 
 import useDebounce from '../../hooks/useDebounce'
-import { RecipePropsTypes } from '../Recipe'
+import { Recipe } from '../RecipePage'
 import Sorting from '../../components/Sorting/Sorting'
 import Main from '../../components/Main/Main'
 
@@ -11,7 +11,7 @@ import styles from './HomePage.module.scss'
 type HomePagePropsTypes = {
   edamamLinkParams: EdamamLinkParamsTypes
   setEdamamLinkParams: (params: EdamamLinkParamsTypes) => void
-  recipes: Array<RecipePropsTypes>
+  recipes: Array<Recipe>
   getRecipes: (url: EdamamLinkParamsTypes) => void
   errorMessage?: string
 }

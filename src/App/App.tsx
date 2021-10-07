@@ -1,10 +1,9 @@
 import { useState } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { ErrorContext } from '../context'
-// import { useErrorContext } from '../context'
 
 import Homepage from '../pages/HomePage'
-import { RecipePropsTypes } from '../pages/Recipe'
+import RecipePage, { Recipe } from '../pages/RecipePage'
 
 import styles from './App.module.scss'
 
@@ -24,7 +23,7 @@ const App: React.FC = () => {
       q: 'pizza',
     })
 
-  const [recipes, setRecipes] = useState<RecipePropsTypes[]>([])
+  const [recipes, setRecipes] = useState<Recipe[]>([])
   const [errorMessage, setErrorMessage] = useState<string>('')
 
   const getRecipes = async (edamamLinkParams: EdamamLinkParamsTypes) => {
@@ -61,6 +60,14 @@ const App: React.FC = () => {
                 errorMessage={errorMessage}
               />
             </Route>
+          </Switch>
+          <Switch>
+            <Route
+              path='/recipe/:recipeID'
+              component={() => {
+                return <RecipePage recipes={recipes} />
+              }}
+            />
           </Switch>
         </Router>
       </div>

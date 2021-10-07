@@ -4,7 +4,7 @@ import { EdamamLinkParamsTypes } from '../../App/App'
 import Card from '../Card/Card'
 import Container from '../Container/Container'
 import InputValidator from '../InputValidator/InputValidator'
-import { RecipePropsTypes } from '../../pages/Recipe'
+import { Recipe } from '../../pages/RecipePage'
 
 import styles from './Main.module.scss'
 import { useErrorContext } from '../../context'
@@ -14,7 +14,7 @@ type MainPropsTypes = {
   edamamLinkParams: EdamamLinkParamsTypes
   debouncedEdamamParams: EdamamLinkParamsTypes
   setEdamamLinkParams: (params: EdamamLinkParamsTypes) => void
-  recipes: Array<RecipePropsTypes>
+  recipes: Array<Recipe>
   getRecipes: (url: EdamamLinkParamsTypes) => void
 }
 
@@ -78,16 +78,21 @@ const Main: React.FC<MainPropsTypes> = (props) => {
 
           <div className={styles.recipes}>
             {recipes.length !== 0 &&
-              recipes.map((recipe, idx) => (
-                <Card
-                  title={recipe.recipe.label}
-                  textForNumber={'Calories: '}
-                  num={recipe.recipe.calories}
-                  image={recipe.recipe.image}
-                  key={idx}
-                  className={styles.card}
-                />
-              ))}
+              recipes.map((recipe, idx) => {
+                const recipeID = recipe.recipe.uri.split('#')[1]
+
+                return (
+                  <Card
+                    route={`/recipe/${recipeID}`}
+                    title={recipe.recipe.label}
+                    textForNumber={'Calories: '}
+                    num={recipe.recipe.calories}
+                    image={recipe.recipe.image}
+                    key={idx}
+                    className={styles.card}
+                  />
+                )
+              })}
             <InputValidator
               className={styles.validator}
               len={recipes.length}

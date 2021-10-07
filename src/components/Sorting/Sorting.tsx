@@ -1,11 +1,11 @@
 import styles from './Sorting.module.scss'
-/* TODO Sorting Features */
 
 type SortingParameter = {
   title: string
   callback: Function
 }
 
+/* TODO Sorting Features */
 const sortingParameters: Array<SortingParameter> = [
   {
     title: 'A - Z',

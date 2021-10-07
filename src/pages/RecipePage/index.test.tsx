@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react'
-import Recipe, { RecipePropsTypes } from '.'
+import RecipePage, { Recipe } from '.'
 
-const recipe: RecipePropsTypes = {
+const recipe: Recipe = {
   recipe: {
     label: 'Something Tasty',
     calories: 1200,
@@ -24,8 +24,14 @@ const recipe: RecipePropsTypes = {
   },
 }
 
+const recipes = [recipe]
+
+test('should be on page without params and correctly works', () => {
+  render(<RecipePage recipes={[]} />)
+})
+
 test('should be on page with truthy params', () => {
-  render(<Recipe {...recipe} />)
+  render(<RecipePage recipes={recipes} />)
 })
 
 // TODO

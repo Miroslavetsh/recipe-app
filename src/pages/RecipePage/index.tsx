@@ -1,8 +1,10 @@
+import { useParams } from 'react-router'
 import Card from '../../components/Card/Card'
 import { IngredientPropsTypes } from '../../components/Ingredient/Ingredient'
+
 import styles from './Styles.module.scss'
 
-export type RecipePropsTypes = {
+export type Recipe = {
   recipe: {
     label: string
     calories: number
@@ -15,7 +17,21 @@ export type RecipePropsTypes = {
   }
 }
 
-const Recipe: React.FC<RecipePropsTypes> = (props) => {
+export type RecipePagePropsTypes = {
+  recipes: Array<Recipe>
+}
+
+type Params = {
+  recipeID: string
+}
+
+const RecipePage: React.FC<RecipePagePropsTypes> = (props) => {
+  const { recipeID }: Params = useParams()
+  const { recipes } = props
+  const recipe = recipes.find(
+    (recipe) => recipe.recipe.uri.indexOf(recipeID) !== -1
+  )
+
   const {
     label,
     calories,
@@ -24,26 +40,30 @@ const Recipe: React.FC<RecipePropsTypes> = (props) => {
     totalTime,
     healthLabels,
     ingredients,
-    uri
-  } = props.recipe
+    uri,
+  } = recipe?.recipe || {}
+
+  // TODO ingredient page
 
   return (
     <div className={styles.recipe}>
+      <h1>Recipe Page</h1>
       <p>{uri}</p>
       <p>{label}</p>
-      <p>{calories.toFixed(2)}</p>
+      <p>{calories?.toFixed(2)}</p>
       <img src={image} alt={image} />
       <p>{totalTime}</p>
       <p>{mealType}</p>
       <p>{healthLabels} lbls</p>
       <div className={styles.ingerdients}>
-        {ingredients.map((ingredient: IngredientPropsTypes, idx) => (
+        {ingredients?.map((ingredient: IngredientPropsTypes, idx: number) => (
           <Card
+            route={'/'}
             title={ingredient.food}
             num={ingredient.weight}
             image={ingredient.image}
-            key={idx}
             textForNumber={'Weight: '}
+            key={idx}
           />
         ))}
       </div>
@@ -51,4 +71,4 @@ const Recipe: React.FC<RecipePropsTypes> = (props) => {
   )
 }
 
-export default Recipe
+export default RecipePage
