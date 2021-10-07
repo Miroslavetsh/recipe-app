@@ -75,6 +75,13 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    &:hover {
+      .image {
+        &::after {
+          font-size: 1.4em;
+        }
+      }
+    }
     .image {
       margin-right: 1.6em;
       max-width: 60px;
