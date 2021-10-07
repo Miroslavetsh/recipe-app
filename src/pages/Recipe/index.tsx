@@ -60,7 +60,7 @@ const Recipe: React.FC<RecipePagePropsTypes> = (props) => {
         <p>{healthLabels} lbls</p>
 
         <h2 className={styles.subtitle}>Ingredients</h2>
-        <div className={styles.ingerdients}>
+        <div className={styles.ingredients}>
           {ingredients?.map((ingredient: IngredientSchema, idx: number) => (
             <Card
               className={styles.card}
