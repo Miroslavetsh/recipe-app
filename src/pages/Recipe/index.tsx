@@ -3,6 +3,7 @@ import BackButton from '../../components/BackButton/BackButton'
 // import { Route } from 'react-router-dom'
 import Card from '../../components/Card/Card'
 import Container from '../../components/Container/Container'
+import ErrorLabel from '../../components/ErrorLabel/ErrorLabel'
 import IngredientSchema from '../../schema/Ingredient'
 import RecipeSchema from '../../schema/Recipe'
 // import Ingredient from '../../pages/Ingredient'
@@ -24,6 +25,12 @@ const Recipe: React.FC<RecipePagePropsTypes> = (props) => {
     (recipe) => recipe.recipe.uri.indexOf(recipeId) !== -1
   )
 
+  if (typeof recipe === 'undefined') {
+    return (
+      <ErrorLabel message='There are no recipes :( <br /> So, you can back home and load at least one' />
+    )
+  }
+
   const {
     label,
     calories,
@@ -32,7 +39,7 @@ const Recipe: React.FC<RecipePagePropsTypes> = (props) => {
     totalTime,
     healthLabels,
     ingredients,
-  } = recipe?.recipe || {}
+  } = recipe.recipe
 
   return (
     <div className={styles.page}>

@@ -12,8 +12,6 @@ import Home from '../pages/Home'
 import Recipe from '../pages/Recipe'
 import RecipeSchema from '../schema/Recipe'
 
-import styles from './App.module.scss'
-
 export type EdamamLinkParamsTypes = {
   from: number
   to: number
@@ -55,36 +53,34 @@ const App: React.FC = () => {
 
   return (
     <ErrorContext.Provider value={{ errorMessage, setErrorMessage }}>
-      <div className={styles.wrapper}>
-        <Router>
-          <Switch>
-            <Route exact path='/'>
-              <Redirect to='/recipes' />
-            </Route>
-            <Route exact path='/recipes'>
-              <Home
-                edamamLinkParams={edamamLinkParams}
-                setEdamamLinkParams={setEdamamLinkParams}
-                recipes={recipes}
-                getRecipes={getRecipes}
-                errorMessage={errorMessage}
-              />
-            </Route>
-            <Route
-              path='/recipes/:recipeId'
-              component={() => {
-                return <Recipe recipes={recipes} />
-              }}
+      <Router>
+        <Switch>
+          <Route exact path='/'>
+            <Redirect to='/recipes' />
+          </Route>
+          <Route exact path='/recipes'>
+            <Home
+              edamamLinkParams={edamamLinkParams}
+              setEdamamLinkParams={setEdamamLinkParams}
+              recipes={recipes}
+              getRecipes={getRecipes}
+              errorMessage={errorMessage}
             />
-            {/* <Route
+          </Route>
+          <Route
+            path='/recipes/:recipeId'
+            component={() => {
+              return <Recipe recipes={recipes} />
+            }}
+          />
+          {/* <Route
               path='/ingredients/:foodId'
               component={() => {
                 return <Ingredient ingredient={ingredient} />
               }}
             /> */}
-          </Switch>
-        </Router>
-      </div>
+        </Switch>
+      </Router>
     </ErrorContext.Provider>
   )
 }

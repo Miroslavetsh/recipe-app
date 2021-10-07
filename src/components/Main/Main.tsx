@@ -1,13 +1,15 @@
 import { useEffect, useRef } from 'react'
+
 import useIntersectionObserver from '../../hooks/useIntersectionObserver'
+import { useErrorContext } from '../../context'
+import RecipeSchema from '../../schema/Recipe'
+
 import { EdamamLinkParamsTypes } from '../../App/App'
 import Card from '../Card/Card'
 import Container from '../Container/Container'
 import InputValidator from '../InputValidator/InputValidator'
-import RecipeSchema from '../../schema/Recipe'
 
 import styles from './Main.module.scss'
-import { useErrorContext } from '../../context'
 
 type MainPropsTypes = {
   searchRef: any

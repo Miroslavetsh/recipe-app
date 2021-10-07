@@ -1,5 +1,24 @@
+@import '../../styles/variables.scss';
+
 .page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  flex-direction: column;
+}
+
+.message {
+  text-align: center;
+  font-size: 1.2em;
+  line-height: 1.6;
+  width: 100%;
+  color: $dark_light_color;
 }
