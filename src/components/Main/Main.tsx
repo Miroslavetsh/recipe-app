@@ -4,7 +4,7 @@ import { EdamamLinkParamsTypes } from '../../App/App'
 import Card from '../Card/Card'
 import Container from '../Container/Container'
 import InputValidator from '../InputValidator/InputValidator'
-import { Recipe } from '../../pages/RecipePage'
+import { RecipeSchema } from '../../pages/Recipe'
 
 import styles from './Main.module.scss'
 import { useErrorContext } from '../../context'
@@ -14,7 +14,7 @@ type MainPropsTypes = {
   edamamLinkParams: EdamamLinkParamsTypes
   debouncedEdamamParams: EdamamLinkParamsTypes
   setEdamamLinkParams: (params: EdamamLinkParamsTypes) => void
-  recipes: Array<Recipe>
+  recipes: Array<RecipeSchema>
   getRecipes: (url: EdamamLinkParamsTypes) => void
 }
 

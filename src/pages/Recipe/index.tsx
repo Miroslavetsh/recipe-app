@@ -4,7 +4,7 @@ import { IngredientPropsTypes } from '../../components/Ingredient/Ingredient'
 
 import styles from './Styles.module.scss'
 
-export type Recipe = {
+export interface RecipeSchema {
   recipe: {
     label: string
     calories: number
@@ -18,14 +18,14 @@ export type Recipe = {
 }
 
 export type RecipePagePropsTypes = {
-  recipes: Array<Recipe>
+  recipes: Array<RecipeSchema>
 }
 
 type Params = {
   recipeID: string
 }
 
-const RecipePage: React.FC<RecipePagePropsTypes> = (props) => {
+const Recipe: React.FC<RecipePagePropsTypes> = (props) => {
   const { recipeID }: Params = useParams()
   const { recipes } = props
   const recipe = recipes.find(
@@ -71,4 +71,4 @@ const RecipePage: React.FC<RecipePagePropsTypes> = (props) => {
   )
 }
 
-export default RecipePage
+export default Recipe

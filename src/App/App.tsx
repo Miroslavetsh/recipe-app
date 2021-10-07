@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { ErrorContext } from '../context'
 
-import Homepage from '../pages/HomePage'
-import RecipePage, { Recipe } from '../pages/RecipePage'
+import Home from '../pages/Home'
+import RecipePage, { RecipeSchema } from '../pages/Recipe'
 
 import styles from './App.module.scss'
 
@@ -23,7 +23,7 @@ const App: React.FC = () => {
       q: 'pizza',
     })
 
-  const [recipes, setRecipes] = useState<Recipe[]>([])
+  const [recipes, setRecipes] = useState<RecipeSchema[]>([])
   const [errorMessage, setErrorMessage] = useState<string>('')
 
   const getRecipes = async (edamamLinkParams: EdamamLinkParamsTypes) => {
@@ -52,7 +52,7 @@ const App: React.FC = () => {
         <Router>
           <Switch>
             <Route exact path='/'>
-              <Homepage
+              <Home
                 edamamLinkParams={edamamLinkParams}
                 setEdamamLinkParams={setEdamamLinkParams}
                 recipes={recipes}

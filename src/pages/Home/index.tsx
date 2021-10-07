@@ -2,21 +2,21 @@ import { useEffect, useRef } from 'react'
 import { EdamamLinkParamsTypes } from '../../App/App'
 
 import useDebounce from '../../hooks/useDebounce'
-import { Recipe } from '../RecipePage'
+import { RecipeSchema } from '../Recipe'
 import Sorting from '../../components/Sorting/Sorting'
 import Main from '../../components/Main/Main'
 
-import styles from './HomePage.module.scss'
+import styles from './Home.module.scss'
 
-type HomePagePropsTypes = {
+type HomePropsTypes = {
   edamamLinkParams: EdamamLinkParamsTypes
   setEdamamLinkParams: (params: EdamamLinkParamsTypes) => void
-  recipes: Array<Recipe>
+  recipes: Array<RecipeSchema>
   getRecipes: (url: EdamamLinkParamsTypes) => void
   errorMessage?: string
 }
 
-const HomePage: React.FC<HomePagePropsTypes> = (props) => {
+const Home: React.FC<HomePropsTypes> = (props) => {
   const { edamamLinkParams, setEdamamLinkParams, recipes, getRecipes } = props
   const searchRef = useRef(null)
 
@@ -45,8 +45,8 @@ const HomePage: React.FC<HomePagePropsTypes> = (props) => {
   )
 }
 
-HomePage.defaultProps = {
+Home.defaultProps = {
   errorMessage: '',
 }
 
-export default HomePage
+export default Home

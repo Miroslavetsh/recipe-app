@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react'
-import RecipePage, { Recipe } from '.'
+import RecipePage, { RecipeSchema } from '.'
 
-const recipe: Recipe = {
+const recipe: RecipeSchema = {
   recipe: {
     label: 'Something Tasty',
     calories: 1200,
