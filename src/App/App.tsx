@@ -8,7 +8,7 @@ import {
 import { ErrorContext } from '../context'
 
 import Home from '../pages/Home'
-// import Ingredient from '../pages/Ingredient'
+import Ingredient from '../pages/Ingredient'
 import Recipe from '../pages/Recipe'
 import RecipeSchema from '../schema/Recipe'
 
@@ -58,6 +58,9 @@ const App: React.FC = () => {
           <Route exact path='/'>
             <Redirect to='/recipes' />
           </Route>
+          <Route exact path='/ingredients'>
+            <Redirect to='/recipes' />
+          </Route>
           <Route exact path='/recipes'>
             <Home
               edamamLinkParams={edamamLinkParams}
@@ -73,12 +76,24 @@ const App: React.FC = () => {
               return <Recipe recipes={recipes} />
             }}
           />
-          {/* <Route
-              path='/ingredients/:foodId'
-              component={() => {
-                return <Ingredient ingredient={ingredient} />
-              }}
-            /> */}
+          {/* TODO ingredient route */}
+          <Route
+            path='/ingredients/:foodId'
+            component={() => {
+              return (
+                <Ingredient
+                  food={''}
+                  foodCategory={''}
+                  image={''}
+                  measure={''}
+                  quantity={0}
+                  text={''}
+                  weight={0}
+                  foodId={''}
+                />
+              )
+            }}
+          />
         </Switch>
       </Router>
     </ErrorContext.Provider>
