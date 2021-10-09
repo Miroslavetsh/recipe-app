@@ -1,4 +1,5 @@
 import { useParams } from 'react-router'
+import BackButton from '../../components/BackButton/BackButton'
 import Container from '../../components/Container/Container'
 import ErrorLabel from '../../components/ErrorLabel/ErrorLabel'
 import { IngredientSerializedSchema } from '../../schema/Ingredient'
@@ -36,12 +37,14 @@ const Ingredient: React.FC = () => {
 
   return (
     <div className={styles.page}>
+      <BackButton />
+
       <Container>
         <p>Ingredient Page</p>
         <p>{food}</p>
         <p>{foodCategory}</p>
         <img src={image} alt={image} />
-        <p>{measure}</p>
+        <p>{measure.replace('null', 'no measure')}</p>
         <p>{quantity}</p>
         <p>{text}</p>
         <p>{weight}</p>
