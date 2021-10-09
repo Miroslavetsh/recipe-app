@@ -1,17 +1,19 @@
+import { useEffect } from 'react'
 import { useParams } from 'react-router'
+import { EdamamLinkParamsTypes } from '../../App/App'
 import BackButton from '../../components/BackButton/BackButton'
-// import { Route } from 'react-router-dom'
 import Card from '../../components/Card/Card'
 import Container from '../../components/Container/Container'
 import ErrorLabel from '../../components/ErrorLabel/ErrorLabel'
 import IngredientSchema from '../../schema/Ingredient'
 import RecipeSchema from '../../schema/Recipe'
-// import Ingredient from '../../pages/Ingredient'
 
 import styles from './Styles.module.scss'
 
 export type RecipePagePropsTypes = {
   recipes: Array<RecipeSchema>
+  edamamLinkParams: EdamamLinkParamsTypes
+  getRecipes: (url: EdamamLinkParamsTypes) => void
 }
 
 type Params = {
@@ -20,10 +22,16 @@ type Params = {
 
 const Recipe: React.FC<RecipePagePropsTypes> = (props) => {
   const { recipeId }: Params = useParams()
-  const { recipes } = props
+  const { recipes, getRecipes, edamamLinkParams } = props
   const recipe = recipes.find(
     (recipe) => recipe.recipe.uri.indexOf(recipeId) !== -1
   )
+
+  useEffect(() => {
+    if (recipes.length === 0) {
+      getRecipes(edamamLinkParams)
+    }
+  })
 
   if (typeof recipe === 'undefined') {
     return (
@@ -61,18 +69,40 @@ const Recipe: React.FC<RecipePagePropsTypes> = (props) => {
 
         <h2 className={styles.subtitle}>Ingredients</h2>
         <div className={styles.ingredients}>
-          {ingredients?.map((ingredient: IngredientSchema, idx: number) => (
-            <Card
-              className={styles.card}
-              horizontal={true}
-              route={`/ingredients/${ingredient.foodId}`}
-              title={ingredient.food}
-              num={ingredient.weight}
-              image={ingredient.image}
-              textForNumber={'Weight: '}
-              key={idx}
-            />
-          ))}
+          {ingredients?.map((ingredient: IngredientSchema, idx: number) => {
+            const {
+              food,
+              foodCategory,
+              image,
+              measure,
+              quantity,
+              text,
+              weight,
+              foodId,
+            } = ingredient
+
+            const foodURI = encodeURIComponent(food)
+            const foodCategoryURI = encodeURIComponent(foodCategory)
+            const imageURI = encodeURIComponent(image)
+            const measureURI = encodeURIComponent(measure)
+            const quantityURI = encodeURIComponent(quantity)
+            const textURI = encodeURIComponent(text)
+            const weightURI = encodeURIComponent(weight)
+            const foodIdURI = encodeURIComponent(foodId)
+
+            return (
+              <Card
+                className={styles.card}
+                horizontal={true}
+                route={`/ingredients/${foodIdURI}/${foodURI}/${foodCategoryURI}/${imageURI}/${measureURI}/${quantityURI}/${textURI}/${weightURI}`}
+                title={food}
+                num={weight}
+                image={image}
+                textForNumber={'Weight: '}
+                key={idx}
+              />
+            )
+          })}
         </div>
       </Container>
     </div>
