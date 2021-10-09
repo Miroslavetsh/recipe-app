@@ -14,8 +14,8 @@ const ErrorLabel: React.FC<ErrorLabelPropsTypes> = (props) => {
     <div className={styles.page}>
       <BackButton className={styles.back} />
       <Container className={styles.content}>
-        {paragraphs.map((paragraph: string) => (
-          <p className={styles.message}>
+        {paragraphs.map((paragraph: string, idx: number) => (
+          <p className={styles.message} key={idx}>
             {paragraph} <br />
           </p>
         ))}
