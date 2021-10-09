@@ -1,24 +1,43 @@
+import { useParams } from 'react-router'
 import Container from '../../components/Container/Container'
 import ErrorLabel from '../../components/ErrorLabel/ErrorLabel'
-import IngredientSchema from '../../schema/Ingredient'
+import { IngredientSerializedSchema } from '../../schema/Ingredient'
 
 import styles from './Styles.module.scss'
 
-const Ingredient: React.FC<IngredientSchema> = (props) => {
-  if (typeof props === 'undefined') {
+const Ingredient: React.FC = () => {
+  const params = useParams<IngredientSerializedSchema>()
+
+  const {
+    foodIdURI,
+    foodURI,
+    foodCategoryURI,
+    imageURI,
+    measureURI,
+    quantityURI,
+    textURI,
+    weightURI,
+  } = params
+
+  const food = decodeURIComponent(foodURI || '')
+  const foodCategory = decodeURIComponent(foodCategoryURI || '')
+  const image = decodeURIComponent(imageURI || '')
+  const measure = decodeURIComponent(measureURI || '')
+  const quantity = decodeURIComponent(quantityURI || '')
+  const text = decodeURIComponent(textURI || '')
+  const weight = decodeURIComponent(weightURI || '')
+  const foodId = decodeURIComponent(foodIdURI || '')
+
+  if (typeof foodId !== 'string') {
     return (
-      <ErrorLabel message='This page  is developing. <br /> No ingredients, sorry...' />
+      <ErrorLabel message='Ingredients is unavailiable. <br /> Go Home and Load at least one recipe...' />
     )
   }
-
-  const { food, foodCategory, image, measure, quantity, text, weight, foodId } =
-    props
 
   return (
     <div className={styles.page}>
       <Container>
         <p>Ingredient Page</p>
-        <p>{foodId}</p>
         <p>{food}</p>
         <p>{foodCategory}</p>
         <img src={image} alt={image} />
