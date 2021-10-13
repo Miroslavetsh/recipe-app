@@ -21,7 +21,7 @@ type Params = {
 }
 
 const Recipe: React.FC<RecipePagePropsTypes> = (props) => {
-  const { recipeId }: Params = useParams()
+  const { recipeId }: Params = useParams<Params>()
   const { recipes, getRecipes, edamamLinkParams } = props
   const recipe = recipes.find(
     (recipe) => recipe.recipe.uri.indexOf(recipeId) !== -1
