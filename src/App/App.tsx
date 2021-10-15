@@ -10,6 +10,7 @@ import { ErrorContext } from '../context'
 import Home from '../pages/Home'
 import Ingredient from '../pages/Ingredient'
 import Recipe from '../pages/Recipe'
+
 import RecipeSchema from '../schema/Recipe'
 
 export type EdamamLinkParamsTypes = {
@@ -32,21 +33,32 @@ const App: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState<string>('')
 
   const getRecipes = async (edamamLinkParams: EdamamLinkParamsTypes) => {
-    try {
-      const { from, to, q } = edamamLinkParams
-      const edamamLink = `https://api.edamam.com/search?q=${q}&from=${from}&to=${to}&app_id=${APP_ID}&app_key=${APP_KEY}`
+    const { from, to, q } = edamamLinkParams
+    const edamamLink = `https://api.edamam.com/search?q=${q}&from=${from}&to=${to}&app_id=${APP_ID}&app_key=${APP_KEY}`
 
-      const response: Response = await fetch(edamamLink)
-      const data = await response.json()
+    const data = await fetch(edamamLink)
+      .then((response: Response) => {
+        return response.json()
+      })
+      .catch((err: Error) => {
+        switch (err.message) {
+          case 'Failed to fetch':
+            setErrorMessage('You have no internet connection at the moment')
+            break
+          default:
+            setErrorMessage('Something gone wrong...')
+            break
+        }
+      })
+
+    try {
       setRecipes(data.hits)
-    } catch (err) {
-      const e = err as Error
-      switch (e.name) {
-        case 'TypeError':
-          setErrorMessage(
-            'It seems like too many requests to the server. Please, wait a few seconds and try again'
-          )
-          console.warn(e.message)
+    } catch (e) {
+      const err = e as Error
+      if (err.name === 'TypeError') {
+        setErrorMessage(
+          'It seems like too many requests to the server. Please, wait a few seconds and try again'
+        )
       }
     }
   }
@@ -73,26 +85,18 @@ const App: React.FC = () => {
           <Route
             path='/recipes/:recipeId'
             component={() => {
-              return <Recipe recipes={recipes} />
-            }}
-          />
-          {/* TODO ingredient route */}
-          <Route
-            path='/ingredients/:foodId'
-            component={() => {
               return (
-                <Ingredient
-                  food={''}
-                  foodCategory={''}
-                  image={''}
-                  measure={''}
-                  quantity={0}
-                  text={''}
-                  weight={0}
-                  foodId={''}
+                <Recipe
+                  recipes={recipes}
+                  edamamLinkParams={edamamLinkParams}
+                  getRecipes={getRecipes}
                 />
               )
             }}
+          />
+          <Route
+            path='/ingredients/:foodIdURI/:foodURI/:foodCategoryURI/:imageURI/:measureURI/:quantityURI/:textURI/:weightURI'
+            component={Ingredient}
           />
         </Switch>
       </Router>

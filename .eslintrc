@@ -16,7 +16,7 @@
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
     "indent": [2, 2, { "SwitchCase": 1 }],
-    "linebreak-style": ["error", "unix"],
+    "linebreak-style": 0,
     "quotes": ["error", "single"],
     "semi": ["error", "never"],
     "ban-ts-ignore": "off",

@@ -1,3 +1,5 @@
+import { SyntheticEvent } from 'react'
+import { useHistory } from 'react-router'
 import style from './BackButton.module.scss'
 
 type BackButtonPropsTypes = {
@@ -7,9 +9,17 @@ type BackButtonPropsTypes = {
 const BackButton: React.FC<BackButtonPropsTypes> = (props) => {
   const { className } = props
   const classNames = [style.button, className]
+  const history = useHistory()
 
   return (
-    <a className={classNames.join(' ')} href={'/recipes'} title='Move Back'>
+    <a
+      className={classNames.join(' ')}
+      href={'/'}
+      onClick={(event: SyntheticEvent) => {
+        event.preventDefault()
+        history.goBack()
+      }}
+      title='Go Back'>
       <span>
         <svg
           width='8px'
