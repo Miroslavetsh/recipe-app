@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom'
-
 import styles from './Card.module.scss'
 
 type CardPropsTypes = {
@@ -21,7 +19,7 @@ const Card: React.FC<CardPropsTypes> = (props) => {
     classNames.push(styles._horizontal)
 
     return (
-      <Link to={route} className={classNames.join(' ')}>
+      <a href={route} className={classNames.join(' ')}>
         <div className={styles.image}>
           <img src={image} alt={image} />
         </div>
@@ -31,12 +29,12 @@ const Card: React.FC<CardPropsTypes> = (props) => {
             {textForNumber} <strong>{num.toFixed(2)}</strong>
           </p>
         </div>
-      </Link>
+      </a>
     )
   }
 
   return (
-    <Link to={route} className={classNames.join(' ')}>
+    <a href={route} className={classNames.join(' ')}>
       <div className={styles.image}>
         <img src={image} alt={image} />
       </div>
@@ -44,7 +42,7 @@ const Card: React.FC<CardPropsTypes> = (props) => {
       <p className={styles.number}>
         {textForNumber} <strong>{num.toFixed(2)}</strong>
       </p>
-    </Link>
+    </a>
   )
 }
 
