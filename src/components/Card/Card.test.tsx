@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react'
-import Card from '../Card/Card'
+import Card from './Card'
 
 const cardProps = {
   title: 'Card title',
@@ -37,12 +37,20 @@ const cardPropsWithoutClassNameAndHorizontal = {
   route: '',
 }
 
-// describe('Card component', () => {
-//   test('should be on page with truthy params', () => {
-//     render(<Card {...cardProps} />)
-//   })
+describe('Card component', () => {
+  test('should be on page with truthy params', () => {
+    render(<Card {...cardProps} />)
+  })
 
-// test('should correctly process className prop', () => {
-//   render(<Card {...cardProps} />)
-// })
-// })
+  test('should correctly process className prop', () => {
+    render(<Card {...cardPropsWithoutClassName} />)
+  })
+
+  test('should correctly process horizontal prop', () => {
+    render(<Card {...cardPropsWithoutHorizontal} />)
+  })
+
+  test('should correctly process className and horizontal props', () => {
+    render(<Card {...cardPropsWithoutClassNameAndHorizontal} />)
+  })
+})
