@@ -11,7 +11,7 @@ import Home from '../pages/Home'
 import Ingredient from '../pages/Ingredient'
 import Recipe from '../pages/Recipe'
 
-import RecipeSchema from '../schema/Recipe'
+import RecipeSchema from '../models/Recipe'
 
 export type EdamamLinkParamsTypes = {
   from: number

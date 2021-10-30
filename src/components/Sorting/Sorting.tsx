@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import RecipeSchema from '../../schema/Recipe'
+import RecipeSchema from '../../models/Recipe'
 import styles from './Sorting.module.scss'
 
 type SortingParameter = {

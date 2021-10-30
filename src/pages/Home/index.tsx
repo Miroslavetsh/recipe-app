@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { EdamamLinkParamsTypes } from '../../App/App'
 
 import useDebounce from '../../hooks/useDebounce'
-import RecipeSchema from '../../schema/Recipe'
+import RecipeSchema from '../../models/Recipe'
 import Sorting from '../../components/Sorting/Sorting'
 import Main from '../../components/Main/Main'
 
