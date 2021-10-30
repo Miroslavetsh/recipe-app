@@ -13,11 +13,18 @@ type HomePropsTypes = {
   setEdamamLinkParams: (params: EdamamLinkParamsTypes) => void
   recipes: Array<RecipeSchema>
   getRecipes: (url: EdamamLinkParamsTypes) => void
+  setRecipes: (recipes: Array<RecipeSchema>) => void
   errorMessage?: string
 }
 
 const Home: React.FC<HomePropsTypes> = (props) => {
-  const { edamamLinkParams, setEdamamLinkParams, recipes, getRecipes } = props
+  const {
+    edamamLinkParams,
+    setEdamamLinkParams,
+    recipes,
+    getRecipes,
+    setRecipes,
+  } = props
   const searchRef = useRef(null)
 
   const debouncedEdamamParams = useDebounce<EdamamLinkParamsTypes>(
@@ -32,7 +39,7 @@ const Home: React.FC<HomePropsTypes> = (props) => {
 
   return (
     <div className={styles.page}>
-      <Sorting />
+      <Sorting recipes={recipes} setRecipes={setRecipes} />
       <Main
         setEdamamLinkParams={setEdamamLinkParams}
         recipes={recipes}

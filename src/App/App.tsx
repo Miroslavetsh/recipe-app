@@ -79,6 +79,7 @@ const App: React.FC = () => {
               setEdamamLinkParams={setEdamamLinkParams}
               recipes={recipes}
               getRecipes={getRecipes}
+              setRecipes={setRecipes}
               errorMessage={errorMessage}
             />
           </Route>
