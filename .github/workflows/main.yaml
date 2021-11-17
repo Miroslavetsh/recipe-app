@@ -15,7 +15,7 @@ on:
 
 jobs:
   setup:
-    name: Setup A Project
+    name: Setup a Project With Test Coverage & Linted Code Base
     runs-on: ubuntu-latest
 
     steps:
