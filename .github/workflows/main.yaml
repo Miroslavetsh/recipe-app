@@ -9,9 +9,9 @@ name: CI/CD
 
 on:
   push:
-    branches: [master]
+    branches: [master, dev]
   pull_request:
-    branches: [master]
+    branches: [master, dev]
 
 jobs:
   setup:
@@ -19,8 +19,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Install packages
+      - name: Checkout Code
       - uses: actions/checkout@v2
+      
+      - name: Install packages
         run: npm i
 
       - name: Run ESLint
