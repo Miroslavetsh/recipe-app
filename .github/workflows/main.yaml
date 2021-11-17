@@ -14,21 +14,16 @@ on:
     branches: [master]
 
 jobs:
-  build:
+  setup:
+    name: Setup A Project
     runs-on: ubuntu-latest
+
     steps:
       - name: Install packages
         run: npm i
 
-  lint:
-    name: Lint Project Files
-    runs-on: ubuntu-latest
-    steps:
       - name: Run ESLint
         run: npm run lint
 
-  test:
-    runs-on: ubuntu-latest
-    steps:
       - name: Run Tests
         run: npm run test
