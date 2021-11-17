@@ -42,3 +42,15 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 ### `yarn build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Docker Usage
+
+To run project locally, use next commands:
+`docker pull node:14.15.4`
+`docker build .`
+`docker images` - is the place, where you can find IMAGE ID
+`docker run -p 3000:3000 --name recipe-app {IMAGE ID}`
+
+To stop image, use these commands:
+`docker ps -a` - is to show all containers, you can see your CONTAINER ID
+`docker stop {CONTAINER ID | recipe-app}`
