@@ -2,7 +2,7 @@ import { useParams } from 'react-router'
 import BackButton from '../../components/BackButton/BackButton'
 import Container from '../../components/Container/Container'
 import ErrorLabel from '../../components/ErrorLabel/ErrorLabel'
-import { IngredientSerializedSchema } from '../../schema/Ingredient'
+import { IngredientSerializedSchema } from '../../models/Ingredient'
 
 import styles from './Styles.module.scss'
 

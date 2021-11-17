@@ -18,6 +18,7 @@ const InputValidator: React.FC<InputValidatorPropsTypes> = (props) => {
       message =
         'It seems like your entered word is not an ingredient. Try again :)'
   } catch {}
+
   return <p className={className}>{message}</p>
 }
 

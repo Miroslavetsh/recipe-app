@@ -5,8 +5,8 @@ import BackButton from '../../components/BackButton/BackButton'
 import Card from '../../components/Card/Card'
 import Container from '../../components/Container/Container'
 import ErrorLabel from '../../components/ErrorLabel/ErrorLabel'
-import IngredientSchema from '../../schema/Ingredient'
-import RecipeSchema from '../../schema/Recipe'
+import IngredientSchema from '../../models/Ingredient'
+import RecipeSchema from '../../models/Recipe'
 
 import styles from './Styles.module.scss'
 
@@ -21,7 +21,7 @@ type Params = {
 }
 
 const Recipe: React.FC<RecipePagePropsTypes> = (props) => {
-  const { recipeId }: Params = useParams()
+  const { recipeId }: Params = useParams<Params>()
   const { recipes, getRecipes, edamamLinkParams } = props
   const recipe = recipes.find(
     (recipe) => recipe.recipe.uri.indexOf(recipeId) !== -1

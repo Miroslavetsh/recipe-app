@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 
 import useIntersectionObserver from '../../hooks/useIntersectionObserver'
 import { useErrorContext } from '../../context'
-import RecipeSchema from '../../schema/Recipe'
+import RecipeSchema from '../../models/Recipe'
 
 import { EdamamLinkParamsTypes } from '../../App/App'
 import Card from '../Card/Card'

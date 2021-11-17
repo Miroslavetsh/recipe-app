@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { EdamamLinkParamsTypes } from '../../App/App'
 
 import useDebounce from '../../hooks/useDebounce'
-import RecipeSchema from '../../schema/Recipe'
+import RecipeSchema from '../../models/Recipe'
 import Sorting from '../../components/Sorting/Sorting'
 import Main from '../../components/Main/Main'
 
@@ -13,11 +13,18 @@ type HomePropsTypes = {
   setEdamamLinkParams: (params: EdamamLinkParamsTypes) => void
   recipes: Array<RecipeSchema>
   getRecipes: (url: EdamamLinkParamsTypes) => void
+  setRecipes: (recipes: Array<RecipeSchema>) => void
   errorMessage?: string
 }
 
 const Home: React.FC<HomePropsTypes> = (props) => {
-  const { edamamLinkParams, setEdamamLinkParams, recipes, getRecipes } = props
+  const {
+    edamamLinkParams,
+    setEdamamLinkParams,
+    recipes,
+    getRecipes,
+    setRecipes,
+  } = props
   const searchRef = useRef(null)
 
   const debouncedEdamamParams = useDebounce<EdamamLinkParamsTypes>(
@@ -32,7 +39,7 @@ const Home: React.FC<HomePropsTypes> = (props) => {
 
   return (
     <div className={styles.page}>
-      <Sorting />
+      <Sorting recipes={recipes} setRecipes={setRecipes} />
       <Main
         setEdamamLinkParams={setEdamamLinkParams}
         recipes={recipes}
