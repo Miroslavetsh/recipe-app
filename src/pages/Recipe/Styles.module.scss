@@ -24,6 +24,10 @@
   }
 }
 
+.inner {
+  padding: 60px 0;
+}
+
 .title {
   text-align: center;
   font-size: 5.2em;
@@ -33,10 +37,51 @@
   z-index: 1;
 }
 
+.subtitle {
+  margin-bottom: 24px;
+
+  color: #e03e3e;
+  font-size: 36px;
+  font-weight: 300;
+  text-align: center;
+}
+
+.time {
+  font-weight: 900;
+  font-size: 14px;
+  text-align: right;
+}
+
+.mealType {
+  font-weight: 900;
+}
+
 .ingredients {
   display: flex;
   flex-wrap: wrap;
   gap: 1.25%;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.listItem {
+  width: 20%;
+  display: flex;
+  align-items: center;
+
+  font-size: 18px;
+  line-height: 1.4;
+  color: #fff;
+  svg {
+    max-width: 20px;
+    margin-right: 8px;
+    path {
+      fill: #fff;
+    }
+  }
 }
 
 .card {
